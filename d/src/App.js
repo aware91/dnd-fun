@@ -9,7 +9,7 @@ function App() {
     axios
       .get(`https://www.dnd5eapi.co/api/classes/`)
       .then(res => {
-        setDnd(res.data)
+        setDnd(res.data.results)
         // console.log('aw: app.js: .get: ', res.data)
       })
       .catch(err => {
@@ -17,14 +17,14 @@ function App() {
       })
   }, [])
 
-  console.log('const dnd useState', dnd.results)
+  console.log('const dnd useState', dnd)
 
   return (
     <div className="App">
       <header className="App-header">
         {dnd.map(DnD => (
           <div key={DnD.results}>
-            <p>{DnD.results.name}</p>
+            <p>{DnD.name}</p>
           </div>
         ))}
       </header>
