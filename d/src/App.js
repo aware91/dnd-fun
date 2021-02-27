@@ -1,34 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React from 'react';
 import './App.css';
+import {Route, Switch} from 'react-router-dom';
+import { Classes } from './components/classes/index.js';
 
 function App() {
-  const [ dnd, setDnd ] = useState([])
-
-  useEffect(() => {
-    axios
-      .get(`https://www.dnd5eapi.co/api/classes/`)
-      .then(res => {
-        setDnd(res.data.results)
-        // console.log('aw: app.js: .get: ', res.data)
-      })
-      .catch(err => {
-        console.log('error', err.message, err.response)
-      })
-  }, [])
-
-  console.log('const dnd useState', dnd)
-
   return (
-    <div className="App">
-      <header className="App-header">
-        {dnd.map(DnD => (
-          <div key={DnD.results}>
-            <p>{DnD.name}</p>
-          </div>
-        ))}
-      </header>
-    </div>
+    <Switch>
+      <Route path='/' exact />
+      <Route path='/classes' component={Classes} />
+      {/* <Route path='/monsters' component={Monsters} />
+      <Route path='/features' component={Features} />
+      <Route path='/spells' component={Spells} /> */}
+    </Switch>
   );
 }
 
