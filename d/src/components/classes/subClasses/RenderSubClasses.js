@@ -3,11 +3,10 @@ import axios from 'axios';
 
 function RenderClasses() {
     const [ dnd, setDnd ] = useState([])
-    const [classes, setClasses] = useState('')
 
     useEffect(() => {
     axios
-        .get(`https://www.dnd5eapi.co/api/classes/`)
+        .get(`https://www.dnd5eapi.co/api/classes/${classes}`)
         .then(res => {
         setDnd(res.data.results)
         // console.log('aw: app.js: .get: ', res.data)
@@ -17,16 +16,11 @@ function RenderClasses() {
         })
     }, [])
 
-    const classClick = e => {
-        e.preventDefault();
-        console.log('classClick', dnd)
-    }
-
     return (
         <div>
         {dnd.map(DnD => (
             <div key={DnD.results}>
-            <button onClick={classClick}>{DnD.name}</button>
+            <p>{DnD.name}</p>
             </div>
         ))}
     </div>
